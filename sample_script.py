@@ -31,3 +31,4 @@ assert 'table'.lower() in driver.current_url.lower(), f"Expected query not in {d
 print('Test Passed')
 
 driver.quit()
+
