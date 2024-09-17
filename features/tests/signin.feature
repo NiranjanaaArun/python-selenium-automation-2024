@@ -2,6 +2,11 @@
 Feature: Target signin page
 
   Scenario: verify that a logged out user can navigate to Sign In
-    Given Open target.com
+    Given Open Target
     When Click Sign In
     Then Verify Sign In form opened
+
+  Scenario:  Verify benefit cells on Target Circle Page
+    Given Target Circle Page
+    Then Verify there are 10 benefit cells
+
