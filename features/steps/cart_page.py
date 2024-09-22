@@ -12,11 +12,14 @@ cart = (By.CSS_SELECTOR, "div.h-margin-l-x2 span")
 
 @given('Open Target page')
 def target_page(context):
-    context.driver.get('https://www.target.com')
+#     context.driver.get('https://www.target.com')
+    context.app.main_page.open_main()
+
 
 @when('Click cart icon')
 def click_cart_icon(context):
-    context.driver.find_element(By.CSS_SELECTOR, "[href*='/icons/Cart.svg#Cart']").click()
+    # context.driver.find_element(By.CSS_SELECTOR, "[href*='/icons/Cart.svg#Cart']").click()
+    context.app.header.cart_icon()
 
 @when('Search for an {item}')
 def item_search(context, item):
@@ -38,11 +41,12 @@ def added_items(context):
 
 @then('“Your cart is empty” message is shown')
 def message_is_shown(context):
-    actual_result = context.driver.find_element(By.CSS_SELECTOR,"[data-test='boxEmptyMsg']")
-    expected_result = "Your cart is empty"
-
-    assert actual_result.text == expected_result, f'Expected {expected_result} but got {actual_result.text}'
-    print("Test Case passed")
+    # actual_result = context.driver.find_element(By.CSS_SELECTOR,"[data-test='boxEmptyMsg']")
+    # expected_result = "Your cart is empty"
+    #
+    # assert actual_result.text == expected_result, f'Expected {expected_result} but got {actual_result.text}'
+    # print("Test Case passed")
+    context.app.checkout_page.cart_empty_message()
 
 @then("Verify the products")
 def number_and_price_of_products(context):

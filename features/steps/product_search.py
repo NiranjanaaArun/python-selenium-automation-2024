@@ -1,6 +1,3 @@
-from itertools import count
-from os.path import split
-
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from behave import given, when, then
@@ -9,10 +6,12 @@ from time import sleep
 
 SEARCH_INPUT = (By.NAME, 'q')
 SEARCH_SUBMIT = (By.NAME, 'btnK')
+
+SEARCH_WORD=(By.ID, 'search')
 SELECTED_SIZE = (By.CSS_SELECTOR, "div[data-test='@web/VariationComponent'] li[data-io-i='1']")
 ALL_COLORS = (By.CSS_SELECTOR, "div[data-test='@web/VariationComponent']:nth-of-type(2) li")
 SELECTED_COLOR = (By.CSS_SELECTOR, "div[data-test='@web/VariationComponent']:nth-of-type(2)")
-SEARCH_WORD=(By.ID, 'search')
+
 
 LISTINGS= (By.CSS_SELECTOR, "div[data-test*='site-top-of-funnel/ProductCardWrapper']")
 PRODUCT_TITLE = (By.CSS_SELECTOR, "[data-test*='product-title']")
@@ -29,7 +28,8 @@ def open_target_product(context, product_id):
 
 # @given('Open Target page')
 # def open_target(context):
-#     context.driver.get('https://www.target.com/')
+#     # context.driver.get('https://www.target.com/')
+#     context.app.main_page.open_main()
 
 @when('Input {search_word} into search field')
 def input_search(context, search_word):
@@ -46,15 +46,20 @@ def click_search_icon(context):
 
 @when('Input {search_word} into search field1')
 def word(context, search_word):
-    search= context.driver.find_element(*SEARCH_WORD)
-    search.send_keys(search_word)
-    context.driver.find_element(By.CSS_SELECTOR, "[type='submit']").click()
+    # search= context.driver.find_element(*SEARCH_WORD)
+    # search.send_keys(search_word)
+    # context.driver.find_element(By.CSS_SELECTOR, "[type='submit']").click()
+    context.app.header.search_product(search_word)
 
 @then('Product results for {search_word} are shown')
 def verify_found_results_text(context, search_word):
 
     assert search_word.lower() in context.driver.current_url.lower(), \
         f'Expected query not in {context.driver.current_url.lower()}'
+
+@then('Verify {search_word} is on the search results header')
+def results_header(context, search_word):
+    context.app.search_results_page.verify_results_header(search_word)
 
 @then('Verify user can click through colors')
 def verify_colors(context):

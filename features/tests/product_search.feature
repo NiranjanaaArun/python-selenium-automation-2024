@@ -18,4 +18,5 @@ Feature: Test Scenarios for Search functionality
   Scenario: Verify that every product on Target search
     Given Open Target page
     When Input Tea into search field1
-    Then Verify product name and product image
+    Then Verify Tea is on the search results header
+    #Then Verify product name and product image
