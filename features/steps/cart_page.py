@@ -21,22 +21,17 @@ def click_cart_icon(context):
     # context.driver.find_element(By.CSS_SELECTOR, "[href*='/icons/Cart.svg#Cart']").click()
     context.app.header.cart_icon()
 
-@when('Search for an {item}')
-def item_search(context, item):
-    search_tab = context.driver.find_element(By.ID, 'search')
-    search_tab.send_keys(item)
-    context.driver.find_element(By.XPATH, "//button[@type='submit']").click()
-    sleep(10)
 
 @when('Add items into cart')
 def added_items(context):
     context.driver.execute_script("window.scrollBy(0, 700)")
     sleep(2)
-    context.driver.find_element(*item1).click()
-    sleep(3)
-    context.driver.find_element(*side_nav_add_to_cart_btn).click()
-    sleep(4)
-    context.driver.find_element(*checkout).click()
+    # context.driver.find_element(*item1).click()
+    # sleep(3)
+    # context.driver.find_element(*side_nav_add_to_cart_btn).click()
+    # sleep(4)
+    # context.driver.find_element(*checkout).click()
+    context.app.search_results_page.add_item_to_cart()
 
 
 @then('“Your cart is empty” message is shown')
@@ -51,7 +46,8 @@ def message_is_shown(context):
 @then("Verify the products")
 def number_and_price_of_products(context):
     sleep(5)
-    items = context.driver.find_element(*cart).text
-    expected_result = '1 item'
-    print(items)
-    assert expected_result in items, f'{expected_result} =! {items}'
+    # items = context.driver.find_element(*cart).text
+    # expected_result = '1 item'
+    # print(items)
+    # assert expected_result in items, f'{expected_result} =! {items}'
+    context.app.checkout_page.verify_product()

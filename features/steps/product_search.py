@@ -51,6 +51,14 @@ def word(context, search_word):
     # context.driver.find_element(By.CSS_SELECTOR, "[type='submit']").click()
     context.app.header.search_product(search_word)
 
+@when('Search for an {item}')
+def item_search(context, item):
+    # search_tab = context.driver.find_element(By.ID, 'search')
+    # search_tab.send_keys(item)
+    # context.driver.find_element(By.XPATH, "//button[@type='submit']").click()
+    context.app.header.search_product(item)
+    sleep(10)
+
 @then('Product results for {search_word} are shown')
 def verify_found_results_text(context, search_word):
 

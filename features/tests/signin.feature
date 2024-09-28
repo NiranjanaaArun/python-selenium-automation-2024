@@ -10,3 +10,8 @@ Feature: Target signin page
     Given Target Circle Page
     Then Verify there are 10 benefit cells
 
+  Scenario: User can signin successfully
+  Given Open target
+  When Click Sign In
+  When Input email and password on SignIn page
+  Then Verify user is logged in
