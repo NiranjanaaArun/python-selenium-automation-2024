@@ -16,6 +16,12 @@ Feature: Target signin page
     When Input email and password on SignIn page
     Then Verify user is logged in
 
+  Scenario: User cannot signin
+    Given Open target
+    When Click Sign In
+    When Input incorrect email and password combination
+    Then Verify message is shown
+
   Scenario: User can open and close Terms and Condition
     Given Open Target
     When Click Sign In

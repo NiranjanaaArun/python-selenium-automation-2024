@@ -26,6 +26,10 @@ def sign_in(context):
 def email_password (context):
     context.app.signin_page.input_email_password()
 
+@when("Input incorrect email and password combination")
+def incorrect_credentials(context):
+    context.app.signin_page.incorrect_credentials()
+
 @when("Click Term and Condition")
 def term_and_condition(context):
     context.app.signin_page.term_and_condition()
@@ -77,3 +81,7 @@ def return_original_window(context):
     context.driver.switch_to.window(context.original_window)
     # context.app.signin_page.switch_to_window_by_id(context.original_window)
     # sleep(3)
+
+@then('Verify message is shown')
+def message_is_shown(context):
+    context.app.signin_page.message_is_shown()

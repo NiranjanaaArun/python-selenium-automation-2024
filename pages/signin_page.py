@@ -9,6 +9,7 @@ class SignInPage(Page):
     PASSWORD = (By.ID, 'password')
     SIGNIN_BUTTON = (By.ID, 'login')
     TERMS_CONDITIONS = (By.CSS_SELECTOR, "[href*='terms-conditions']")
+    MESSAGE = (By.CSS_SELECTOR, "div[data-test*='AlertDisplay']")
 
     def verify_page_opened(self):
 
@@ -34,3 +35,15 @@ class SignInPage(Page):
 
     def verify_tc_opened(self):
         self.partial_url('terms-conditions/')
+
+    def incorrect_credentials(self):
+        self.input_text('hgatf@gmail.com', *self.EMAIL)
+        sleep(4)
+        self.input_text('Watsup012!', *self.PASSWORD)
+        sleep(4)
+        self.click(*self.SIGNIN_BUTTON)
+        sleep(5)
+
+    def message_is_shown(self):
+        message_shown = self.wait_until_appears(*self.MESSAGE)
+        self.verify_text("We can't find your account.", *self.MESSAGE)

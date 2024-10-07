@@ -5,6 +5,7 @@ from pages.main_page import MainPage
 from pages.search_results_page import SearchResultsPage
 from pages.signin_page import SignInPage
 from pages.target_app_page import TargetAppPage
+from pages.target_help_page import TargetHelpPage
 
 
 class Application:
@@ -17,3 +18,4 @@ class Application:
         self.checkout_page = CheckoutPage(driver)
         self.signin_page = SignInPage(driver)
         self.target_app_page = TargetAppPage(driver)
+        self.target_help_page = TargetHelpPage(driver)
