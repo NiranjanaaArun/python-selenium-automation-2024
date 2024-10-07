@@ -26,6 +26,25 @@ def sign_in(context):
 def email_password (context):
     context.app.signin_page.input_email_password()
 
+@when("Click Term and Condition")
+def term_and_condition(context):
+    context.app.signin_page.term_and_condition()
+
+@when('Store original window')
+def store_original_window(context):
+    context.original_window = context.app.signin_page.get_current_window()
+    print('Original Window:', context.original_window)
+
+@when('Switch to a terms and conditions window')
+def switch_to_new_window(context):
+    # sleep(3)
+    # all_windows= context.driver.window_handles
+    # print('All windows', all_windows)
+    # context.driver.switch_to.window(all_windows[1])
+    # print('After switch current window:', context.app.target_app_page.get_current_window)
+    context.app.signin_page.switch_to_new_window()
+    print('After switched', context.app.signin_page.get_current_window())
+
 @then("Verify Sign In form opened")
 def verify_sign_in(context):
     # actual_result = context.driver.find_element(By.CSS_SELECTOR, "h1[class*='e064f5c-0 sc-315b8ab9-']").text
@@ -33,6 +52,7 @@ def verify_sign_in(context):
     # assert actual_result == expected_result, f'{actual_result} != {expected_result}'
     # print("testcase passed")
     context.app.signin_page.verify_page_opened()
+
 
 @then("Verify there are {no_cells} benefit cells")
 def verify_benefit_cells(context, no_cells):
@@ -44,3 +64,16 @@ def verify_benefit_cells(context, no_cells):
 @then("Verify user is logged in")
 def verify_user(context):
     context.app.main_page.sign_in_disappear()
+
+@then('Verify Terms and Conditions page is opened')
+def verify_terms_conditions(context):
+    context.app.signin_page.verify_tc_opened()
+    sleep(3)
+
+@then('User can close new window and switch back to original')
+def return_original_window(context):
+    context.app.target_app_page.close()
+    sleep(3)
+    context.driver.switch_to.window(context.original_window)
+    # context.app.signin_page.switch_to_window_by_id(context.original_window)
+    # sleep(3)

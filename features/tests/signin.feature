@@ -11,7 +11,17 @@ Feature: Target signin page
     Then Verify there are 10 benefit cells
 
   Scenario: User can signin successfully
-  Given Open target
-  When Click Sign In
-  When Input email and password on SignIn page
-  Then Verify user is logged in
+    Given Open target
+    When Click Sign In
+    When Input email and password on SignIn page
+    Then Verify user is logged in
+
+  Scenario: User can open and close Terms and Condition
+    Given Open Target
+    When Click Sign In
+    And Store original window
+    And Click Term and Condition
+    And Switch to a terms and conditions window
+    Then Verify Terms and Conditions page is opened
+    And User can close new window and switch back to original
+

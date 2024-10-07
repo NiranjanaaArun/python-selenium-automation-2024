@@ -8,6 +8,7 @@ class SignInPage(Page):
     EMAIL = (By.ID, 'username')
     PASSWORD = (By.ID, 'password')
     SIGNIN_BUTTON = (By.ID, 'login')
+    TERMS_CONDITIONS = (By.CSS_SELECTOR, "[href*='terms-conditions']")
 
     def verify_page_opened(self):
 
@@ -26,3 +27,10 @@ class SignInPage(Page):
         sleep(4)
         self.click(*self.SIGNIN_BUTTON)
         sleep(5)
+
+    def term_and_condition(self):
+        self.click(*self.TERMS_CONDITIONS)
+        sleep (4)
+
+    def verify_tc_opened(self):
+        self.partial_url('terms-conditions/')
